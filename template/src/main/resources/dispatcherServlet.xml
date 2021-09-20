@@ -20,7 +20,7 @@
     <!-- 注册filter对象-->
     <context:component-scan base-package="com.template.handler.filter"/>
 
-    <!-- 注册filter对象-->
+    <!-- 注册exception对象-->
     <context:component-scan base-package="com.template.handler.exception"/>
 
     <!-- 注册utils对象-->
