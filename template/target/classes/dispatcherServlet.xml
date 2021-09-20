@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/mvc
+       https://www.springframework.org/schema/mvc/spring-mvc.xsd
+       http://www.springframework.org/schema/aop
+       http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+
+    <!-- 注册controller对象-->
+    <context:component-scan base-package="com.template.controller"/>
+
+    <!-- 注册filter对象-->
+    <context:component-scan base-package="com.template.handler.filter"/>
+
+    <!-- 注册filter对象-->
+    <context:component-scan base-package="com.template.handler.exception"/>
+
+    <!-- 注册utils对象-->
+    <context:component-scan base-package="com.template.utils"/>
+
+    <!-- 注册interceptor对象 -->
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/player/start"/>
+            <bean class="com.template.handler.interceptor.InterceptorHandler"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
+
+    <!-- 注册aop对象-->
+    <aop:aspectj-autoproxy proxy-target-class="true"/>
+
+    <!-- fast-json, 处理json对象-->
+    <mvc:annotation-driven>
+        <mvc:message-converters register-defaults="true">
+            <bean class="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter">
+                <property name="supportedMediaTypes">
+                    <list>
+                        <value>text/html;charset=utf-8</value>
+                        <value>application/json</value>
+                    </list>
+                </property>
+            </bean>
+        </mvc:message-converters>
+    </mvc:annotation-driven>
+
+</beans>
